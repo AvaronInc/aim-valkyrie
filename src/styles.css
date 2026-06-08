@@ -1,0 +1,93 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --radius: 0.25rem;
+  --background: oklch(0.16 0.02 240);
+  --foreground: oklch(0.92 0.05 150);
+  --card: oklch(0.19 0.025 240);
+  --primary: oklch(0.82 0.22 145);
+  --primary-foreground: oklch(0.14 0.02 240);
+  --secondary: oklch(0.24 0.03 240);
+  --muted: oklch(0.22 0.025 240);
+  --muted-foreground: oklch(0.62 0.04 200);
+  --accent: oklch(0.28 0.05 200);
+  --destructive: oklch(0.65 0.28 25);
+  --border: oklch(0.28 0.03 200 / 60%);
+  --success: oklch(0.82 0.22 145);
+  --warning: oklch(0.82 0.18 80);
+  --danger: oklch(0.65 0.28 25);
+  --grid: oklch(0.82 0.22 145 / 8%);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  background-color: var(--background);
+  color: var(--foreground);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-attachment: fixed;
+}
+
+@utility glow-green {
+  text-shadow: 0 0 8px oklch(0.82 0.22 145 / 60%);
+}
+
+@utility glow-red {
+  text-shadow: 0 0 8px oklch(0.65 0.28 25 / 70%);
+}
+
+@utility glow-amber {
+  text-shadow: 0 0 8px oklch(0.82 0.18 80 / 70%);
+}
+
+@utility panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+}
+
+@utility scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+@utility scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    oklch(1 0 0 / 2%) 3px,
+    oklch(1 0 0 / 2%) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@utility live-dot {
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+
+@keyframes fadeInGreen {
+  0% { opacity: 0; background-color: oklch(0.82 0.22 145 / 15%); }
+  100% { opacity: 1; background-color: transparent; }
+}
+
+.feed-item-new {
+  animation: fadeInGreen 0.6s ease-out forwards;
+}
