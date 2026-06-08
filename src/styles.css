@@ -54,12 +54,13 @@ html, body, #root {
   overflow: hidden;
 }
 
-@utility scanline {
+/* scanline must be a plain class — @utility can't define pseudo-element selectors */
+.scanline {
   position: relative;
   overflow: hidden;
 }
 
-@utility scanline::after {
+.scanline::after {
   content: '';
   position: absolute;
   inset: 0;
