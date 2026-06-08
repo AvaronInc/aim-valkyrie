@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
 
 :root {
   --radius: 0.25rem;
@@ -54,7 +54,6 @@ html, body, #root {
   overflow: hidden;
 }
 
-/* scanline must be a plain class — @utility can't define pseudo-element selectors */
 .scanline {
   position: relative;
   overflow: hidden;
