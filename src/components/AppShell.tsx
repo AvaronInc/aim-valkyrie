@@ -1,4 +1,5 @@
-import { ReactNode, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
 import { useLiveSocket } from '../lib/useWebSocket';
 import { LivePayloadContext } from '../lib/context';
