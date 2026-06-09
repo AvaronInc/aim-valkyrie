@@ -1,2 +1,2 @@
-export const API_BASE = "http://192.155.93.235:8000";
-export const WS_URL = "ws://192.155.93.235:8000/ws";
+export const API_BASE = "https://aim.avaron.ai/oracle";
+export const WS_URL = "wss://aim.avaron.ai/oracle/ws";
