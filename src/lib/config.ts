@@ -1,6 +1,6 @@
 const isDev = import.meta.env.DEV;
 
-export const API_BASE = isDev ? '/oracle' : 'https://aim.avaron.ai/oracle';
+export const API_BASE = isDev ? '/api' : 'https://aim.avaron.ai/api';
 export const WS_URL = isDev
-  ? `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/oracle/ws`
-  : 'wss://aim.avaron.ai/oracle/ws';
+  ? `ws://${window.location.host}/ws`
+  : 'wss://aim.avaron.ai/ws';

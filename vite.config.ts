@@ -12,12 +12,12 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      '/oracle/ws': {
+      '/ws': {
         target: 'wss://aim.avaron.ai',
         ws: true,
         changeOrigin: true,
       },
-      '/oracle': {
+      '/api': {
         target: 'https://aim.avaron.ai',
         changeOrigin: true,
       },
