@@ -13,7 +13,6 @@ function dedupeActions(log: ActionEntry[]): ActionEntry[] {
       result.push(entry);
     }
   }
-  // Most recent first
   return result.reverse();
 }
 
@@ -25,6 +24,17 @@ export function useValkyrie() {
     [data?.action_log],
   );
 
+  // Oracle may use recent_events or events at state level — check both
+  const recentEvents = useMemo(() => {
+    const s = data?.state as Record<string, unknown> | undefined;
+    return (
+      (s?.recent_events as unknown[]) ??
+      (s?.events as unknown[]) ??
+      (data?.recent_events as unknown[]) ??
+      []
+    );
+  }, [data]);
+
   return {
     payload: data,
     wsStatus: status,
@@ -32,6 +42,7 @@ export function useValkyrie() {
     agents: data?.agents ?? {},
     approvalQueue: data?.approval_queue ?? [],
     actionLog,
-    defenseMode: data?.defense_mode ?? 'live',
+    recentEvents,
+    defenseMode: (data?.defense_mode as string) ?? 'live',
   };
 }
