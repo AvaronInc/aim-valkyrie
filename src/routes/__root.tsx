@@ -11,6 +11,10 @@ export const Route = createRootRoute({
   component: () => {
     const location = window.location.pathname;
     if (location === '/login') return <Outlet />;
-    return <AppShell><Outlet /></AppShell>;
+    return (
+      <AppShell>
+        <Outlet />
+      </AppShell>
+    );
   },
 });
