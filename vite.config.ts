@@ -12,11 +12,6 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      '/ws': {
-        target: 'wss://aim.avaron.ai',
-        ws: true,
-        changeOrigin: true,
-      },
       '/api': {
         target: 'https://aim.avaron.ai',
         changeOrigin: true,
