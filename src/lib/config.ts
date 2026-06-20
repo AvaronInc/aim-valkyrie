@@ -1,9 +1,7 @@
-const isDev = import.meta.env.DEV;
+// Read from .env.local (VITE_ prefix required for Vite to expose to browser)
+// Fallback to aim.avaron.ai if not set
+const apiBase = import.meta.env.VITE_API_BASE ?? 'https://aim.avaron.ai';
+const wsUrl = import.meta.env.VITE_WS_URL ?? 'wss://aim.avaron.ai/ws';
 
-// In dev, Vite proxies /api/* -> https://aim.avaron.ai/api/*
-// So API_BASE is empty — callers use paths like '/api/approve' directly
-// In prod, prepend the full origin
-export const API_BASE = isDev ? '' : 'https://aim.avaron.ai';
-
-// WebSocket — will update once real path is confirmed
-export const WS_URL = 'wss://aim.avaron.ai/oracle/ws';
+export const API_BASE = import.meta.env.DEV ? '' : apiBase;
+export const WS_URL = wsUrl;
