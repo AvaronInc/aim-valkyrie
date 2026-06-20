@@ -14,7 +14,11 @@ export async function request<T>(path: string, options?: RequestInit): Promise<T
     return res.json();
   } catch (e: unknown) {
     const msg = e instanceof Error ? e.message : String(e);
-    toast.error(`API error: ${msg}`);
+    // Suppress noisy fetch errors in local dev (Oracle not reachable)
+    const isLocalDevError = msg.includes('Failed to fetch') || msg.includes('Load failed') || msg.includes('aborted');
+    if (!isLocalDevError) {
+      toast.error(`API error: ${msg}`);
+    }
     throw e;
   } finally {
     clearTimeout(timeout);
