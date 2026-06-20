@@ -1,7 +1,7 @@
 import { API_BASE } from "./config";
 import { toast } from "sonner";
 
-export async function request<T>(path: string, options?: RequestInit): Promise<T> {
+export async function request<T>(path: string, options?: RequestInit): Promise<T | null> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10000);
   try {
@@ -14,12 +14,16 @@ export async function request<T>(path: string, options?: RequestInit): Promise<T
     return res.json();
   } catch (e: unknown) {
     const msg = e instanceof Error ? e.message : String(e);
-    // Suppress noisy fetch errors in local dev (Oracle not reachable)
-    const isLocalDevError = msg.includes('Failed to fetch') || msg.includes('Load failed') || msg.includes('aborted');
+    const isLocalDevError =
+      msg.includes('Failed to fetch') ||
+      msg.includes('Load failed') ||
+      msg.includes('aborted') ||
+      msg.includes('NetworkError');
     if (!isLocalDevError) {
       toast.error(`API error: ${msg}`);
     }
-    throw e;
+    // Return null instead of throwing so callers don't need try/catch
+    return null;
   } finally {
     clearTimeout(timeout);
   }
