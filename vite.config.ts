@@ -4,7 +4,6 @@ import tailwindcss from '@tailwindcss/vite';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 
 export default defineConfig({
-  base: '/valkyrie/',
   plugins: [
     TanStackRouterVite({ routesDirectory: './src/routes', generatedRouteTree: './src/routeTree.gen.ts' }),
     react(),
