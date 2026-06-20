@@ -10,4 +10,17 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    proxy: {
+      '/oracle/ws': {
+        target: 'wss://aim.avaron.ai',
+        ws: true,
+        changeOrigin: true,
+      },
+      '/oracle': {
+        target: 'https://aim.avaron.ai',
+        changeOrigin: true,
+      },
+    },
+  },
 });
